@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amino Acid Master</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400,600&family=Roboto:wght@300,400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <button id="home-btn" class="icon-btn hidden"><i class="fas fa-arrow-left"></i> Home</button>
+            <h1 id="header-title">Amino Acid Master</h1>
+        </header>
+
+        <!-- ===== Start Screen ===== -->
+        <main id="start-screen" class="main-screen">
+            <div class="start-content">
+                <h2>Welcome!</h2>
+                
+                <div class="start-section">
+                    <h3><i class="fas fa-graduation-cap"></i> Study Mode</h3>
+                    <p>Browse all amino acids and their properties.</p>
+                    <button id="study-mode-btn" class="btn primary full-width">Study All Amino Acids</button>
+                </div>
+
+                <!-- Collapsible Settings Section -->
+                <details class="collapsible-section">
+                    <summary>
+                        <h3><i class="fas fa-sliders-h"></i> Quiz Settings</h3>
+                    </summary>
+                    <div class="collapsible-content">
+                        <div class="setting-group">
+                            <label>Select Amino Acids:</label>
+                            <div class="quick-select-buttons">
+                                <button class="btn-small" data-select="all">All</button>
+                                <button class="btn-small" data-select="none">None</button>
+                                <button class="btn-small" data-select="polar">Polar</button>
+                                <button class="btn-small" data-select="nonpolar">Nonpolar</button>
+                                <button class="btn-small" data-select="charged">Charged</button>
+                            </div>
+                            <div id="amino-acid-selection" class="checkbox-grid">
+                                <!-- Checkboxes will be dynamically inserted here -->
+                            </div>
+                        </div>
+                        <div class="setting-group horizontal-group">
+                            <label for="repetitions">Repetitions per Amino Acid:</label>
+                            <input type="number" id="repetitions" min="1" value="1">
+                        </div>
+                        <div class="setting-group horizontal-group">
+                            <label for="repeat-incorrect">Repeat Incorrect Questions:</label>
+                            <label class="switch">
+                                <input type="checkbox" id="repeat-incorrect" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- Game Mode Launchers -->
+                <div class="start-section quiz-launch-section">
+                     <h3><i class="fas fa-gamepad"></i> Start a Quiz</h3>
+                     <div class="game-mode-launcher">
+                        <button class="game-mode-button" data-mode="properties-to-name">
+                            <i class="fas fa-atom icon"></i>
+                            <div class="button-text">
+                                <strong>Properties to Name</strong>
+                                <span>Guess the name from its properties.</span>
+                            </div>
+                        </button>
+                        <button class="game-mode-button" data-mode="name-to-properties">
+                            <i class="fas fa-flask icon"></i>
+                            <div class="button-text">
+                                <strong>Name to Properties</strong>
+                                <span>Identify the correct properties.</span>
+                            </div>
+                        </button>
+                        <button class="game-mode-button" data-mode="name-to-affinity">
+                            <i class="fas fa-project-diagram icon"></i>
+                            <div class="button-text">
+                                <strong>Name to Affinity</strong>
+                                <span>Identify the structural affinities.</span>
+                            </div>
+                        </button>
+                        <!-- Shuffle Mode -->
+                        <button class="game-mode-button" data-mode="shuffle">
+                            <i class="fas fa-random icon"></i>
+                            <div class="button-text">
+                                <strong>Shuffle Mode</strong>
+                                <span>A random mix of all question types.</span>
+                            </div>
+                        </button>
+                     </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- ===== Study Screen ===== -->
+        <main id="study-screen" class="main-screen hidden">
+            <div id="study-deck"></div>
+        </main>
+
+        <!-- ===== Game (Quiz) Screen ===== -->
+        <main id="game-area" class="main-screen hidden">
+            <p id="session-progress">0/0</p>
+            <div id="flashcard-container">
+                <div class="flashcard">
+                    <div class="card-front"></div>
+                    <div class="card-back"></div>
+                </div>
+            </div>
+            
+            <button id="hint-btn" class="btn-hint hidden"><i class="fas fa-lightbulb"></i> Show Structure Hint</button>
+
+            <div id="controls">
+                <div id="mcq-options" class="mcq-grid"></div>
+                <button id="next-question-btn" class="btn primary hidden">Next Question</button>
+            </div>
+        </main>
+
+        <!-- ===== Session Complete Modal (Report Card) ===== -->
+        <div id="session-complete-modal" class="modal hidden">
+            <div class="modal-content report-card">
+                <div class="report-card-top">
+                    <div class="grade-badge" id="recap-grade">A</div>
+                    <div class="report-card-header">
+                        <h2>Session Recap</h2>
+                        <p id="recap-subtitle">—</p>
+                    </div>
+                </div>
+
+                <div class="report-stats">
+                    <div class="stat">
+                        <div class="stat-value" id="recap-accuracy">0%</div>
+                        <div class="stat-label">Accuracy</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" id="recap-time">0:00</div>
+                        <div class="stat-label">Time</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" id="recap-streak">0</div>
+                        <div class="stat-label">Best Streak</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" id="recap-correct">0</div>
+                        <div class="stat-label">Correct</div>
+                    </div>
+                </div>
+
+                <div class="report-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="recap-progress" style="width:0%"></div>
+                    </div>
+                    <p class="progress-caption">
+                        <span id="recap-correct-count">0</span> correct out of
+                        <span id="recap-total-count">0</span> (<span id="recap-accuracy-inline">0%</span>)
+                    </p>
+                </div>
+
+                <div class="report-lists">
+                    <div class="list good">
+                        <h4><i class="fas fa-trophy"></i> Perfect on First Try</h4>
+                        <ul id="recap-perfect-list"></ul>
+                    </div>
+                    <div class="list needs-work">
+                        <h4><i class="fas fa-undo"></i> Needed Practice</h4>
+                        <ul id="recap-practice-list"></ul>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button id="restart-session-btn" class="btn primary">Play Again</button>
+                    <button id="go-home-from-complete-btn" class="btn secondary">Go Home</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
