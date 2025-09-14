@@ -1,12 +1,12 @@
 # Amino Acid Master
 
-**An interactive web app for studying and quizzing yourself on the 20 common amino acids. Perfect for students of biochemistry, molecular biology, and anyone else wanting to learn the structure and properties of the amino acids.**
+![Amino Acid Master Screenshot](https://github.com/semvdn/AA_Quiz/blob/main/assets/Screenshot.png) 
 
-This application provides a clean, user-friendly interface to learn amino acid names, structures, properties, and structural affinities through a comprehensive study guide and a flexible quiz mode.
+**An interactive web app for studying and quizzing yourself on the 20 common amino acids. Perfect for students of biochemistry, molecular biology, and anyone else wanting to learn the names and properties of the amino acids.**
 
-**[Live Demo](https://your-github-username.github.io/your-repo-name/)** 👈
+This application provides a clean, user-friendly interface to learn amino acid names, structures, properties, and structural affinities.
 
-![Amino Acid Master Screenshot](https://user-images.githubusercontent.com/your-username/your-repo/assets/screenshot.png) 
+**[Live Demo](https://semvdn.github.io/AA_Quiz/)** 👈
 
 ## Features
 
@@ -41,7 +41,7 @@ This application provides a clean, user-friendly interface to learn amino acid n
 
 ## How to Use
 
-Simply open the **[Live Demo link](https://your-github-username.github.io/your-repo-name/)** in your web browser to start using the application. There is no installation required.
+Simply open the **[Live Demo link](https://semvdn.github.io/AA_Quiz/)** in your web browser to start using the application. There is no installation required.
 
 1.  **Study:** Click the "Study All Amino Acids" button to browse the flashcards.
 2.  **Configure:** On the home screen, expand the "Quiz Settings" section to select the amino acids you want to be quizzed on. Use the quick-select buttons ("All", "Polar", "Nonpolar", etc.) for faster setup.
