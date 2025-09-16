@@ -276,6 +276,8 @@ function renderQuestion(question) {
     } else {
         renderMCQQuestion(question);
     }
+    // Ensure card is facing front for the new question
+    flashcard.classList.remove('flipped');
 }
 
 function renderMCQQuestion(question) {
@@ -347,7 +349,6 @@ function renderMCQQuestion(question) {
     cardFront.innerHTML = frontHTML;
     renderBackCard(question);
     hintBtn.classList.toggle('hidden', !showHint);
-    flashcard.classList.remove('flipped');
     updateProgress();
 }
 
@@ -396,7 +397,6 @@ function renderOpenQuestion(question) {
     openQuestionArea.innerHTML = inputHTML;
     renderBackCard(question);
     hintBtn.classList.toggle('hidden', !showHint);
-    flashcard.classList.remove('flipped');
     updateProgress();
 }
 
@@ -628,8 +628,14 @@ function setupEventListeners() {
     gameModeLauncher.querySelectorAll('.game-mode-button').forEach(button => button.addEventListener('click', startQuiz));
 
     nextQuestionBtn.addEventListener('click', () => {
-        gameState.currentCardIndex++;
-        loadNextQuestion();
+        nextQuestionBtn.classList.add('hidden');
+        flashcard.classList.remove('flipped');
+        
+        // Wait for the flip-back animation to start before updating the content
+        setTimeout(() => {
+            gameState.currentCardIndex++;
+            loadNextQuestion();
+        }, 300); // Half of the 0.6s transition time
     });
 
     restartSessionBtn.addEventListener('click', () => {
