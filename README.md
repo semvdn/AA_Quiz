@@ -4,7 +4,7 @@
 
 **A web app for studying the 20 common amino acids.**
 
-This application provides a simple interface to learn amino acid names, properties, and structural affinities.
+This application provides a simple interface to learn amino acid names, properties and structural affinities.
 
 **[Live Demo](https://semvdn.github.io/AA_Quiz/)** 
 
